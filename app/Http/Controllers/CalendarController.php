@@ -17,7 +17,8 @@ class CalendarController extends Controller
     public function index()
     {
         //
-        return view('calendar.index');
+        $user = Auth::user(); 
+        return view('calendar.index' , compact('user'));
     }
 
     /**

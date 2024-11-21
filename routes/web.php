@@ -42,7 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::put("/calendar/update/{calendar}" , [CalendarController::class , "update"])->name("updateCalendar");
     Route::delete("/calendar/delete/{calendar}" , [CalendarController::class , "destroy"])->name("deleteCalendar");
 
-
 });
 
 require __DIR__.'/auth.php';

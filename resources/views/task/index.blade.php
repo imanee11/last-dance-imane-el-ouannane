@@ -343,7 +343,7 @@
     
                         <div class="pt-2">
                             <p class="text-[#fff]/50 text-[12px]">Description: {{ $personalTask->description }}</p>
-                            <p class="text-[#fff]/50 text-[12px]">Deadline: {{ $personalTask->deadline }}</p>
+                            <p class="text-[#fff]/50 text-[12px]">Status: {{ $personalTask->status }}</p>
                         </div>
                     </div>
                 @endforeach

@@ -43,11 +43,11 @@
             </x-nav-link>
         </div>
 
-        <div>
+        {{-- <div>
             <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="fa-solid fa-comments">
                 {{ __('Chats') }}
             </x-nav-link>
-        </div>
+        </div> --}}
 
         <div>
             <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('calendar.index')" icon="fa-solid fa-calendar">

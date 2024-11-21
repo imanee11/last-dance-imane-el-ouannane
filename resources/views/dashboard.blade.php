@@ -120,7 +120,7 @@
 
 
                     {{-- team description --}}
-                    {{-- <div class="mb-4">
+                    <div class="mb-4">
                         <x-input-label for="description" :value="__('Team description ')" />
                         <textarea
                             name="description"
@@ -128,7 +128,7 @@
                             rows="4"
                             class="block mt-1 w-full border-[#fff]/25 bg-transparent focus:outline-none focus:ring-0 focus:border-[#fff]/25 text-[#fff] rounded-md shadow-sm"
                         ></textarea>
-                    </div> --}}
+                    </div>
 
 
                     {{--Submit Button  --}}
