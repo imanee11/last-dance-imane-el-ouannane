@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user(); 
-        $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); // Add sorting here
+        $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
     
         return view('dashboard', compact('user', 'personalTasks'));
     }

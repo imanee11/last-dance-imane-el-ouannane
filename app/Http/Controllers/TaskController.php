@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -15,8 +16,9 @@ class TaskController extends Controller
     public function index()
     {
         //
-        // $personalTasks = auth()->user()->tasks;
-        // return view('dashboard' , compact('personalTasks'));
+        $user = Auth::user(); 
+        $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
+        return view('task.index' , compact('personalTasks' , 'user'));
     }
 
     /**
@@ -36,7 +38,8 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'deadline' => 'required|date',
+            'start' => 'required|date',
+            'end' => 'required|date',
             'priority' => 'required|in:low,medium,high',
             'team_id' => 'nullable|exists:teams,id',
             'assigned_to' => 'nullable|exists:users,id',
@@ -46,7 +49,8 @@ class TaskController extends Controller
         Task::create([
             'name' => $request->name,
             'description' => $request->description,
-            'deadline' => $request->deadline,
+            'start' => $request->start,
+            'end' => $request->end,
             'priority' => $request->priority,
             'user_id' => auth()->id(),
             'team_id' => $request->team_id,
@@ -85,7 +89,8 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'deadline' => 'required|date',
+            'start' => 'required|date',
+            'end' => 'required|date',
             'priority' => 'required|in:low,medium,high',
             'team_id' => 'nullable|exists:teams,id',
             'assigned_to' => 'nullable|exists:users,id',
@@ -95,7 +100,8 @@ class TaskController extends Controller
         $task->update([
             "name" => $request->name,
             "description" => $request->description,
-            "deadline" => $request->deadline,
+            "start" => $request->start,
+            "end" => $request->end,
             "priority" => $request->priority,
             "team_id" => $request->team_id,
             "assigned_to" => $request->assigned_to,

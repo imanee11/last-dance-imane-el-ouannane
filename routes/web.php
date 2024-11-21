@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
@@ -26,10 +27,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/task/store' , [TaskController::class, 'store'])->name("task.store");
     Route::delete('/task/{task}' , [TaskController::class, 'destroy'])->name('task.destroy');
     Route::put('/task/update/{task}' , [TaskController::class, 'update'])->name('task.update');
+    
 
 
     //* team
+    Route::get('/team' , [TeamController::class, 'index'])->name("team.index");
     Route::post('/team/store' , [TeamController::class, 'store'])->name("team.store");
+
+
+    //* calendar
+    Route::get('/calendar' , [CalendarController::class, 'index'])->name("calendar.index");
+    Route::post('/calendar/store' , [CalendarController::class, 'store'])->name("calendar.store");
+    Route::resource("calendar" , CalendarController::class);
+    Route::put("/calendar/update/{calendar}" , [CalendarController::class , "update"])->name("updateCalendar");
+    Route::delete("/calendar/delete/{calendar}" , [CalendarController::class , "destroy"])->name("deleteCalendar");
+
 
 });
 

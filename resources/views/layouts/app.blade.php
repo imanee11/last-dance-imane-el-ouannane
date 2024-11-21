@@ -12,6 +12,9 @@
 
         {{-- <link rel="icon" type="image/png" href="{{ asset('images/small-logo.png') }}"> --}}
 
+        {{-- calendar cdn --}}
+        <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

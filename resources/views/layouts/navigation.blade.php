@@ -38,7 +38,7 @@
         </div>
 
         <div>
-            <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="fa-solid fa-people-group">
+            <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')" icon="fa-solid fa-people-group">
                 {{ __('My teams') }}
             </x-nav-link>
         </div>
@@ -50,10 +50,12 @@
         </div>
 
         <div>
-            <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" icon="fa-solid fa-calendar">
+            <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('calendar.index')" icon="fa-solid fa-calendar">
                 {{ __('Calendar') }}
             </x-nav-link>
         </div>
+
+        
     </div>
 
 

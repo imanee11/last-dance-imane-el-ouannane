@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->text("description");
-            $table->dateTime("deadline");
+            $table->dateTime("start");
+            $table->dateTime("end");
             $table->enum('priority', ['low' , 'medium', 'high'])-> default('medium');
             $table->string("status")->default('pending');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
