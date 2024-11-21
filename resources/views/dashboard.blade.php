@@ -97,7 +97,7 @@
         <div id="createTeamModal" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         
             {{-- modal content --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
 
                 {{-- modal header --}}
                 <div class="flex justify-between items-center  pb-4">
@@ -171,7 +171,7 @@
         <div id="createTaskModal" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         
             {{-- modal content --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
 
                 {{-- modal header --}}
                 <div class="flex justify-between items-center  pb-4">
@@ -290,7 +290,7 @@
         {{-- top part --}}
         <div class="flex justify-between px-[3vw] py-[2vh]">
             {{-- team's part  / bg-[#272727] --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
                 <div class="flex justify-between pb-3">
                     <p class="font-semibold text-[#fff] ">My teams</p>
 
@@ -324,7 +324,7 @@
     
             
             {{-- task's part / bg-[#272727] --}}
-            <div class=" bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
+            <div class=" bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
                 <div class="flex justify-between pb-3">
                     <p class="font-semibold text-[#fff] ">My tasks</p>
 
@@ -385,7 +385,7 @@
                         {{-- @include('components.delete_event') --}}
                         {{-- bg-[#272727] --}}
             
-                        <div class="w-full h-[90vh] bg-[#272727]  border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
+                        <div class="w-full h-[90vh] bg-[#1C1C1C]  border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
             
             
                         <script>
