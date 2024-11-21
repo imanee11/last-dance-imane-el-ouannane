@@ -16,7 +16,10 @@ class TeamController extends Controller
     {
         //
         $user = Auth::user(); 
-        return view('team.index' , compact('user'));
+        // $teams = auth()->user()->teams()->orderBy('created_at', 'desc')->get(); 
+        $teams = Team::all();
+
+        return view('team.index' , compact('user' , 'teams'));
     }
 
     /**
@@ -33,6 +36,29 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable',
+        ]);
+
+
+        $image = $request->image;
+        $imageName = hash("sha256", file_get_contents($image)) . "." . $image->getClientOriginalExtension();
+        $image->move(storage_path("app/public/images"), $imageName);
+
+
+        $team = Team::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            "image" => $imageName,
+            'owner_id' => auth()->id(),
+        ]);
+    
+
+        // dd($request);
+        return redirect()->back()->with('success', 'Team created successfully!');
+
     }
 
     /**
@@ -41,6 +67,9 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         //
+        $user = Auth::user(); 
+        return view('team.detail' , compact("team" , "user"));
+
     }
 
     /**

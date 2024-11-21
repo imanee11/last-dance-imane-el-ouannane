@@ -50,4 +50,28 @@ class User extends Authenticatable
     public function tasks() {
         return $this->hasMany(Task::class);
     }
+
+    public function ownedTeams()
+    {
+        return $this->hasMany(Team::class, 'owner_id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function assignedTasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
+
+    // public function canCreateTeam()
+    // {
+    //     return $this->ownedTeams()->count() < 5 || $this->subscribed('default');
+    // }
+
+
 }

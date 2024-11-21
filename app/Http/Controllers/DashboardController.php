@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user(); 
         $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
-    
-        return view('dashboard', compact('user', 'personalTasks'));
+        // $teams = auth()->user()->teams()->orderBy('created_at', 'desc')->get(); 
+        $teams = Team::all();
+        // $teams = Team::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        return view('dashboard', compact('user', 'personalTasks' , 'teams'));
     }
 
     /**

@@ -20,7 +20,7 @@
         </div>
 
     </div>
-    <div class="px-[3vw] py-[2vh]">
+    <div class="px-[3vw]">
         <div class="">
             <div class="">
     

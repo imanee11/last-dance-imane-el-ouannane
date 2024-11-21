@@ -13,12 +13,12 @@
         <input 
             type="search" 
             placeholder="Search..." 
-            class="px-4 py-3 w-full text-sm text-[#fff] placeholder-[#fff]/50 bg-[#272727] rounded-full focus:outline-none focus:ring-0 focus:border-none border-[1px] border-[#2e2e2e]"
+            class="px-4 py-3 w-full text-sm text-[#fff] placeholder-[#fff]/50 bg-[#1C1C1C] rounded-full focus:outline-none focus:ring-0 focus:border-none border-[1px] border-[#2e2e2e]"
         />
     </div>
 
     
-    <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl px-2 py-4 flex flex-col">
+    <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl px-2 py-4 flex flex-col">
         <div>
             {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 <div class="flex items-center gap-3 py-3 px-3">
@@ -60,7 +60,7 @@
 
 
 
-    <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-2 py-3 flex flex-col justify-end absolute bottom-5 left-5 right-5 ">
+    <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-full px-2 py-3 flex flex-col justify-end absolute bottom-5 left-5 right-5 ">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 

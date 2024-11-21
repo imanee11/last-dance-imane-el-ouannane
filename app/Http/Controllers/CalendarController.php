@@ -28,7 +28,7 @@ class CalendarController extends Controller
     {
         //
 
-        $events = Task::all();
+        $events = Task::where('user_id', Auth::id())->get();
 
         $events = $events->map(function ($e) {
             return [

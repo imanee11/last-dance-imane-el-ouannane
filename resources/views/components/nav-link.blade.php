@@ -6,7 +6,7 @@ $classes = ($active ?? false)
             : 'w-full rounded-full inline-flex items-center text-sm font-medium leading-5 text-[#fff]/50  focus:outline-none transition duration-300 ease-in-out';
 
 $iconClasses = ($active ?? false)
-            ? 'text-[#fff] bg-[#272727] w-[3.2vw] h-[6.5vh] rounded-full' // Icon style when active
+            ? 'text-[#fff] bg-[#1C1C1C] w-[3.2vw] h-[6.5vh] rounded-full' // Icon style when active
             : 'text-[#fff]/50 w-[3.2vw] h-[6.5vh] rounded-full '; // Icon style when inactive
 @endphp
 

@@ -109,13 +109,13 @@
 
 
                 {{-- modal form --}}
-                <form action="{{ route('team.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('team.store') }}" method="POST" class="mt-4" enctype="multipart/form-data">
                     @csrf
 
                     {{-- team name --}}
                     <div class="mb-4">
                         <x-input-label for="name" :value="__('Team name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="teamname" required autocomplete="" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" required autocomplete="" />
                     </div>
 
 
@@ -128,6 +128,26 @@
                             rows="4"
                             class="block mt-1 w-full border-[#fff]/25 bg-transparent focus:outline-none focus:ring-0 focus:border-[#fff]/25 text-[#fff] rounded-md shadow-sm"
                         ></textarea>
+                    </div>
+
+                    {{-- team cover --}}
+                    <div class="mb-4">
+                        {{-- <x-input-label for="image" :value="__('Upload profile picture')" class="pb-3" /> --}}
+                        <div class="relative">
+                            <x-text-input 
+                                id="image" 
+                                name="image" 
+                                type="file" 
+                                class="hidden" 
+                                autocomplete="image" 
+                            />
+                    
+                            <button type="button" onclick="document.getElementById('image').click()" class="px-4 py-2 bg-[#2e2e2e] text-white rounded-full flex items-center space-x-2">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Choose Cover Picture</span>
+                            </button>
+                        </div>
+                        <x-input-error class="mt-2" :messages="$errors->get('image')" />
                     </div>
 
 
@@ -269,16 +289,55 @@
     <div>
         {{-- top part --}}
         <div class="flex justify-between px-[3vw] py-[2vh]">
-            {{-- team's part --}}
+            {{-- team's part  / bg-[#272727] --}}
             <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
-                <p class="font-semibold text-[#fff] pb-3">My teams</p>
+                <div class="flex justify-between pb-3">
+                    <p class="font-semibold text-[#fff] ">My teams</p>
+
+                    {{-- Button to open all tasks blade --}}
+                    <div class="">
+                        <a href="/team">
+                            <button class=" text-[#6737f5]/60  hover:text-[#6737f5]   items-center text-xs font-medium  transition duration-300 underline" >
+                                Show All Teams
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+
+                {{-- tasks small list --}}
+                <div>
+                    <div class="flex flex-col gap-2">
+                        @foreach ($teams->take(3) as $team)
+                            <div class="flex items-center  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
+                                <p class="text-[#fff]  font-medium">{{ $team->name }}</p>
+                                <div class="flex items-center justify-start gap-2 w-[10vw] ">
+                                    <i class="fa-solid fa-clock text-[#dd4a79]"></i>
+                                    {{-- <i class="fa-regular fa-calendar text-[#eb8541]"></i> --}}
+                                    <p class="text-[#fff]/50 text-[10px] font-medium">{{ $team->created_at->format('M d , H:i A ') }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
     
             
-            {{-- task's part --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
-                <p class="font-semibold text-[#fff] pb-3 ">My tasks</p>
-    
+            {{-- task's part / bg-[#272727] --}}
+            <div class=" bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-[48%] p-4">
+                <div class="flex justify-between pb-3">
+                    <p class="font-semibold text-[#fff] ">My tasks</p>
+
+                    {{-- Button to open all tasks blade --}}
+                    <div class="">
+                        <a href="/task">
+                            <button class=" text-[#6737f5]/60  hover:text-[#6737f5]   items-center text-xs font-medium  transition duration-300 underline" >
+                                Show All Tasks
+                            </button>
+                        </a>
+                    </div>
+
+                </div>    
                 {{-- tasks small list --}}
                 <div>
                     <div class="flex flex-col gap-2">
@@ -293,17 +352,6 @@
                             </div>
                         @endforeach
                     </div>
-    
-                
-                    {{-- Button to open all tasks blade --}}
-                    <div class="flex justify-end">
-                        <a href="/task">
-                            <button class=" rounded-full px-4 py-2 text-[#6737f5]/60  hover:text-[#6737f5]  flex gap-2 items-center text-xs font-medium mt-4 transition duration-300 underline" >
-                                Show All Tasks
-                            </button>
-                        </a>
-                    </div>
-    
                 </div>
                 
 
@@ -316,7 +364,8 @@
             {{-- <p class="font-semibold text-[#fff] pb-3">Calendar</p> --}}
             <div>
                 <div class="">
-                    <div class="">
+                    {{-- border-[1px] border-[#2e2e2e] --}}
+                    <div class=" rounded-2xl">
             
                         <form class="hidden" method="post" class="" action="{{ route('calendar.store') }}">
                             @csrf
@@ -334,8 +383,9 @@
                             </form>
                         </div>
                         {{-- @include('components.delete_event') --}}
+                        {{-- bg-[#272727] --}}
             
-                        <div class="w-full h-[90vh] bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
+                        <div class="w-full h-[90vh] bg-[#272727]  border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
             
             
                         <script>

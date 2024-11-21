@@ -64,13 +64,13 @@
 
 
                 {{-- modal form --}}
-                <form action="{{ route('team.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('team.store') }}" method="POST" class="mt-4" enctype="multipart/form-data">
                     @csrf
 
                     {{-- team name --}}
                     <div class="mb-4">
                         <x-input-label for="name" :value="__('Team name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="teamname" required autocomplete="" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" required autocomplete="" />
                     </div>
 
 
@@ -84,6 +84,28 @@
                             class="block mt-1 w-full border-[#fff]/25 bg-transparent focus:outline-none focus:ring-0 focus:border-[#fff]/25 text-[#fff] rounded-md shadow-sm"
                         ></textarea>
                     </div>
+
+
+                    {{-- team cover --}}
+                    <div class="mb-4">
+                        {{-- <x-input-label for="image" :value="__('Upload profile picture')" class="pb-3" /> --}}
+                        <div class="relative">
+                            <x-text-input 
+                                id="image" 
+                                name="image" 
+                                type="file" 
+                                class="hidden" 
+                                autocomplete="image" 
+                            />
+                    
+                            <button type="button" onclick="document.getElementById('image').click()" class="px-4 py-2 bg-[#2e2e2e] text-white rounded-full flex items-center space-x-2">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Choose Cover Picture</span>
+                            </button>
+                        </div>
+                        <x-input-error class="mt-2" :messages="$errors->get('image')" />
+                    </div>
+
 
 
                     {{--Submit Button  --}}
@@ -133,5 +155,49 @@
 
 
         </div>
+    </div>
+
+
+    <div class="px-[3vw]">
+        <div class="flex flex-wrap  gap-5">
+            @foreach ($teams as $team)
+            <a href="/team/show/{{ $team->id }}">
+                <div class=" w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#272727] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
+                    <div class="w-[100%] h-[70%]">
+                        <img class="w-[100%] h-[100%] rounded-lg object-cover " src="{{ asset('storage/images/' . $team->image) }}" alt="">
+                    </div>
+                    <div class="pt-3 flex justify-between items-center ">
+                        <div>
+                            <p class="text-[#fff] font-medium"">{{ $team -> name }}</p>
+                            <p class="text-[#fff]/50 text-[12px]">{{ $team->description }}</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <!-- Avatar group -->
+                                <div class="flex -space-x-2">
+                                  <!-- First avatar -->
+                                  <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 1">
+                                  <!-- Second avatar -->
+                                  <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 2">
+                                  <!-- Third avatar -->
+                                  {{-- <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 3"> --}}
+                                </div>
+                              
+                                <!-- Additional count -->
+                                <div class="ml-2 text-xs font-semibold text-[#6dc489]  rounded-full">
+                                  +124
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+      
+                </div>
+            </a>
+
+            @endforeach
+        </div>
+        
     </div>
 </x-app-layout>

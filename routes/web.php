@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     //* team
     Route::get('/team' , [TeamController::class, 'index'])->name("team.index");
     Route::post('/team/store' , [TeamController::class, 'store'])->name("team.store");
+    Route::get('/team/show/{team}' , [TeamController::class, 'show'])->name('team.show');
 
 
     //* calendar
