@@ -14,12 +14,16 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
-        $user = Auth::user(); 
-        // $teams = auth()->user()->teams()->orderBy('created_at', 'desc')->get(); 
-        $teams = Team::all();
+        $user = Auth::user();
+        
+        // Get teams where user is owner or member
+        $teams = Team::where('owner_id', $user->id)->orWhereHas('users', function($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('team.index' , compact('user' , 'teams'));
+        return view('team.index', compact('user', 'teams'));
     }
 
     /**

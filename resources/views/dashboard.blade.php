@@ -311,7 +311,7 @@
                         @foreach ($teams->take(3) as $team)
                             <div class="flex items-center  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
                                 <p class="text-[#fff]  font-medium">{{ $team->name }}</p>
-                                <div class="flex items-center justify-start gap-2 w-[10vw] ">
+                                <div class="flex items-center justify-start gap-2 w-[9vw] ">
                                     <i class="fa-solid fa-clock text-[#dd4a79]"></i>
                                     {{-- <i class="fa-regular fa-calendar text-[#eb8541]"></i> --}}
                                     <p class="text-[#fff]/50 text-[10px] font-medium">{{ $team->created_at->format('M d , H:i A ') }}</p>
@@ -344,7 +344,7 @@
                         @foreach ($personalTasks->take(3) as $personalTask)
                             <div class="flex items-center  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
                                 <p class="text-[#fff]  font-medium">{{ $personalTask->name }}</p>
-                                <div class="flex items-center justify-start gap-2 w-[10vw] ">
+                                <div class="flex items-center justify-start gap-2 w-[9vw] ">
                                     <i class="fa-solid fa-clock text-[#dd4a79]"></i>
                                     {{-- <i class="fa-regular fa-calendar text-[#eb8541]"></i> --}}
                                     <p class="text-[#fff]/50 text-[10px] font-medium">{{ $personalTask->created_at->format('M d , H:i A ') }}</p>

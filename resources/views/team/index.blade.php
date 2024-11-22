@@ -52,7 +52,7 @@
         <div id="createTeamModal" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         
             {{-- modal content --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
 
                 {{-- modal header --}}
                 <div class="flex justify-between items-center  pb-4">
@@ -158,11 +158,11 @@
     </div>
 
 
-    <div class="px-[3vw]">
+    <div class="px-[3vw] pb-[5vh]">
         <div class="flex flex-wrap  gap-5">
             @foreach ($teams as $team)
             <a href="/team/show/{{ $team->id }}">
-                <div class=" w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#272727] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
+                <div class=" w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#1C1C1C] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
                     <div class="w-[100%] h-[70%]">
                         <img class="w-[100%] h-[100%] rounded-lg object-cover " src="{{ asset('storage/images/' . $team->image) }}" alt="">
                     </div>

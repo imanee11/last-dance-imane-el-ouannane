@@ -41,7 +41,7 @@
                 </div>
                 {{-- @include('components.delete_event') --}}
     
-                <div class="w-full h-[90vh] bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
+                <div class="w-full h-[90vh] bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl border-none p-3" id="calendar"></div>
     
     
                 <script>

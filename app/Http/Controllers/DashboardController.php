@@ -16,8 +16,15 @@ class DashboardController extends Controller
         $user = Auth::user(); 
         $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
         // $teams = auth()->user()->teams()->orderBy('created_at', 'desc')->get(); 
-        $teams = Team::all();
+        // $teams = Team::all();
         // $teams = Team::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
+        // Get teams where user is owner or member
+        $teams = Team::where('owner_id', $user->id)->orWhereHas('users', function($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('dashboard', compact('user', 'personalTasks' , 'teams'));
     }

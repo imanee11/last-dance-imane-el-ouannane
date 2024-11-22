@@ -53,7 +53,7 @@
         <div id="createTaskModal" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         
             {{-- modal content --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
 
                 {{-- modal header --}}
                 <div class="flex justify-between items-center  pb-4">
@@ -209,10 +209,10 @@
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-2xl font-bold text-[#fff] bg-clip-text">All Tasks</h2>
                 <div class="flex gap-4">
-                    {{-- <div class="flex items-center gap-2 px-4 py-2 rounded-lg  border-[1px] border-[#2e2e2e]">
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg  border-[1px] border-[#2e2e2e]">
                         <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
                         <span class="text-sm text-white/70">Active Tasks</span>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
 

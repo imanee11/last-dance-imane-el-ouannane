@@ -52,7 +52,7 @@
         <div id="createTaskModal" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
         
             {{-- modal content --}}
-            <div class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
 
                 {{-- modal header --}}
                 <div class="flex justify-between items-center  pb-4">
@@ -163,6 +163,54 @@
                 </form>
             </div>
         </div> 
+
+
+        {{-- add member --}}
+        <div id="addMember" class="fixed inset-0 bg-[#101010] bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        
+            {{-- modal content --}}
+            <div class="bg-[#1C1C1C] border-[1px] border-[#2e2e2e] rounded-2xl  shadow-md shadow-black/40 w-full max-w-md p-6">
+
+                {{-- modal header --}}
+                <div class="flex justify-between items-center  pb-4">
+                    <h2 class="text-lg font-medium text-gray-100">Add a Member</h2>
+                    <button
+                        class="text-[#eb8541] hover:text-[#fff] text-[25px] focus:outline-none cursor-pointer transition duration-300"
+                        onclick="document.getElementById('addMember').classList.add('hidden');">
+                        &times;
+                    </button>
+                </div>
+
+
+                {{-- modal form action="{{ route('invite.store') }}" --}} 
+                {{-- {{ $team->id }} --}}
+                <form action="{{ route('team.invite', $team) }}" method="POST" class="mt-4">
+                    @csrf
+                
+                    <!-- Member Email -->
+                    <div class="mb-4">
+                        <x-input-label for="email" :value="__('Member Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" required />
+                    </div>
+                
+                    <!-- Submit Button -->
+                    <div class="flex justify-end gap-2">
+                        <button
+                            type="button"
+                            class="inline-flex items-center px-4 py-2 bg-transparent border border-[#fff]/25 rounded-md font-semibold text-xs text-gray-300 uppercase tracking-widest shadow-sm focus:outline-none transition ease-in-out duration-300"
+                            onclick="document.getElementById('addMember').classList.add('hidden');">
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            class="font-semibold rounded-md px-4 py-2 bg-[#6737f5] text-[#fff] border-[2px] border-[#6737f5] transition duration-300 text-xs uppercase tracking-widest">
+                            Send Invitation
+                        </button>
+                    </div>
+                </form>
+                
+            </div>
+        </div> 
     </div>
 
 
@@ -172,25 +220,20 @@
         <div class="py-[6vh] flex items-center gap-3 ">    
             <button
                 class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium"
-                onclick="document.getElementById('createTaskModal').classList.remove('hidden');"
-
-                >
+                onclick="document.getElementById('createTaskModal').classList.remove('hidden');">
                 <i class="fa-solid fa-list-check text-[#dd4a79] text-[15px]"></i>
                 Create a Task
             </button>
 
             <button
                 class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium"
-                onclick="document.getElementById('createTaskModal').classList.remove('hidden');"
-
-                >
+                onclick="document.getElementById('addMember').classList.remove('hidden');">
                 <i class="fa-solid fa-user-plus text-[#6737f5] text-[15px]"></i>
                 Add a Member
             </button>
         </div>
 
         <div class="profile-picture flex items-center gap-2">
-
             <div>
                 <p class="text-[#fff] text-sm font-medium">{{ Auth::user()->name }}</p>
             </div>
@@ -204,15 +247,11 @@
                 <i class="fas fa-user-circle text-[#2e2e2e] text-4xl"></i>
             </a>
             @endif
-
-
-
         </div>
-
     </div>
 
     <div class="px-[3vw]">
-        <div class="flex items-center bg-[#272727]  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
+        <div class="flex items-center bg-[#1C1C1C]  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
             <div class="flex gap-2 items-center">
                 <i class="fa-solid fa-circle text-[20px]  text-[#6dc489]"></i>
                 <p class="text-[#fff]  font-medium">{{ $team->name }}</p>
