@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     ->name('invitation.respond');
 
 
+
     //* calendar
     Route::get('/calendar' , [CalendarController::class, 'index'])->name("calendar.index");
     Route::post('/calendar/store' , [CalendarController::class, 'store'])->name("calendar.store");

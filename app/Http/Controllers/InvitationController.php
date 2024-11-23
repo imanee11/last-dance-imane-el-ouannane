@@ -72,12 +72,10 @@ class InvitationController extends Controller
             $invitation->team->users()->attach($user->id);
             $invitation->update(['status' => 'Accepted']);
 
-            return redirect()->route('dashboard')
-                ->with('success', 'That user have successfully joined the team.');
+            return back()->with('success', 'User have successfully joined the team.');
         } else {
             $invitation->update(['status' => 'Rejected']);
-            return redirect()->route('dashboard')
-                ->with('info', 'That user have declined the team invitation.');
+            return back()->with('info', 'User have declined the team invitation.');
         }
     }
 }

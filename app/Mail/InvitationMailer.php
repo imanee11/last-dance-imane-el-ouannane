@@ -32,8 +32,7 @@ class InvitationMailer extends Mailable
 
     public function build()
     {
-        return $this->markdown('team.mail')
-                    ->subject('Team Invitation');
+        return $this->markdown('team.mail')->subject('Team Invitation');
     }
 }
 

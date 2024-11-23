@@ -159,45 +159,66 @@
 
 
     <div class="px-[3vw] pb-[5vh]">
-        <div class="flex flex-wrap  gap-5">
+        <div class="flex flex-wrap gap-5">
             @foreach ($teams as $team)
             <a href="/team/show/{{ $team->id }}">
-                <div class=" w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#1C1C1C] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
+                <div class="w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#1C1C1C] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
                     <div class="w-[100%] h-[70%]">
-                        <img class="w-[100%] h-[100%] rounded-lg object-cover " src="{{ asset('storage/images/' . $team->image) }}" alt="">
+                        <img class="w-[100%] h-[100%] rounded-lg object-cover" src="{{ asset('storage/images/' . $team->image) }}" alt="{{ $team->name }}">
                     </div>
-                    <div class="pt-3 flex justify-between items-center ">
+                    <div class="pt-3 flex justify-between items-center">
                         <div>
-                            <p class="text-[#fff] font-medium"">{{ $team -> name }}</p>
+                            <p class="text-[#fff] font-medium">{{ $team->name }}</p>
                             <p class="text-[#fff]/50 text-[12px]">{{ $team->description }}</p>
                         </div>
                         <div>
                             <div class="flex items-center">
                                 <!-- Avatar group -->
                                 <div class="flex -space-x-2">
-                                  <!-- First avatar -->
-                                  <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 1">
-                                  <!-- Second avatar -->
-                                  <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 2">
-                                  <!-- Third avatar -->
-                                  {{-- <img class="w-8 h-8 rounded-full border-2 border-white" src="https://via.placeholder.com/150" alt="User 3"> --}}
+                                    @foreach($team->users->take(2) as $user)
+                                        @if($user->image)
+                                            <img class="w-8 h-8 rounded-full border-2 border-[#2e2e2e] object-cover" 
+                                                 src="{{ asset('storage/' . $user->image) }}" 
+                                                 alt="{{ $user->name }}"
+                                                 title="{{ $user->name }}">
+                                        @else
+                                            <div class="w-8 h-8 rounded-full border-2 border-[#2e2e2e] bg-gray-600 flex items-center justify-center">
+                                                <span class="text-white text-xs">
+                                                    {{ strtoupper(substr($user->name, 0, 1)) }}
+                                                </span>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
-                              
-                                <!-- Additional count -->
-                                <div class="ml-2 text-xs font-semibold text-[#6dc489]  rounded-full">
-                                  +124
-                                </div>
+                                
+                                <!-- Additional count with tooltip -->
+                                @if($team->users->count() > 2)
+                                    <div class="relative group">
+                                        <div class="ml-1 text-xs font-semibold text-[#6dc489] rounded-full cursor-pointer">
+                                            +{{ $team->users->count() - 2 }}
+                                        </div>
+                                        <!-- Tooltip -->
+                                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-max">
+                                            <div class="bg-[#2e2e2e] text-white text-xs rounded-lg py-2 px-3 shadow-lg">
+                                                <div class="flex flex-col gap-1">
+                                                    @foreach($team->users->skip(2) as $user)
+                                                        <span>{{ $user->name }}</span>
+                                                    @endforeach
+                                                </div>
+                                                <!-- Arrow -->
+                                                <div class="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#2e2e2e] rotate-45"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-
-
                     </div>
-      
                 </div>
             </a>
-
             @endforeach
         </div>
-        
     </div>
+    
+    
 </x-app-layout>
