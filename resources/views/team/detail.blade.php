@@ -252,6 +252,14 @@
                 Show Members
             </button>
             @endif
+
+
+            {{-- chat btn --}}
+            <button class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium">
+            <i class="fa-solid fa-comments text-[#6dc489] text-[15px]"></i>
+            Chat
+        </button>
+
         </div>
 
         <div class="profile-picture flex items-center gap-2">

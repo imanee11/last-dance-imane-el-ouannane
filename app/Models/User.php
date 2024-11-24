@@ -72,6 +72,13 @@ class User extends Authenticatable
     // {
     //     return $this->ownedTeams()->count() < 5 || $this->subscribed('default');
     // }
-
+    public function teamCount()
+    {
+        return $this->teams()->count();;
+    }
+    public function isSubscribed()
+    {
+        return $this->is_subscribed;
+    }
 
 }

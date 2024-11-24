@@ -163,13 +163,18 @@
             @foreach ($teams as $team)
             <a href="/team/show/{{ $team->id }}">
                 <div class="w-[22.5vw] h-[40vh] shadow-md shadow-black/40 bg-[#1C1C1C] border-[#2e2e2e] border-[1px] py-2 px-3 rounded-lg cursor-pointer">
-                    <div class="w-[100%] h-[70%]">
-                        <img class="w-[100%] h-[100%] rounded-lg object-cover" src="{{ asset('storage/images/' . $team->image) }}" alt="{{ $team->name }}">
+                    <div class="w-[100%] h-[70%] relative">
+                        <img class="w-[100%] h-[100%] rounded-lg object-cover " src="{{ asset('storage/images/' . $team->image) }}" alt="{{ $team->name }}">
+                        <div class="absolute top-2 right-1">
+                            <span class="text-[#fff]/50 text-[12px] bg-[#1C1C1C] px-3 py-2 rounded-lg">Owner :{{ $team->owner->name }}</span>
+                        </div>
                     </div>
                     <div class="pt-3 flex justify-between items-center">
                         <div>
-                            <p class="text-[#fff] font-medium">{{ $team->name }}</p>
+                            <p class="text-[#fff] font-medium">{{ $team->name }} </p>
                             <p class="text-[#fff]/50 text-[12px]">{{ $team->description }}</p>
+
+
                         </div>
                         <div>
                             <div class="flex items-center">

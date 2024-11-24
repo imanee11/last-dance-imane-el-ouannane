@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 
 class TeamController extends Controller
@@ -45,6 +47,24 @@ class TeamController extends Controller
             'description' => 'nullable|string',
             'image' => 'nullable',
         ]);
+
+
+
+        $user = auth()->user();
+        $teamCount = $user->ownedTeams()->count();
+
+        // Check if user has reached the free team limit
+        if ($teamCount >= 5 && !$user->isSubscribed()) {
+            // Store team data in session for later
+            session([
+                'pending_team' => [
+                    'name' => $request->name,
+                    'description' => $request->description
+                ]
+            ]);
+
+            return redirect()->route('subscription.show');
+        }
 
 
         $image = $request->image;

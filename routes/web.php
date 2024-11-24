@@ -4,6 +4,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::resource("calendar" , CalendarController::class);
     Route::put("/calendar/update/{calendar}" , [CalendarController::class , "update"])->name("updateCalendar");
     Route::delete("/calendar/delete/{calendar}" , [CalendarController::class , "destroy"])->name("deleteCalendar");
+
+
+    //* subscription
+    Route::get('/subscription/payment', [SubscriptionController::class, 'show'])->name('subscription.show');
+    Route::post('/subscription/create-checkout-session', [SubscriptionController::class, 'createCheckoutSession'])->name('subscription.checkout');
+    Route::get('/subscription/success', [SubscriptionController::class, 'success'])->name('subscription.success');
 
 });
 

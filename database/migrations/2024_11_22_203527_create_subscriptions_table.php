@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->boolean('is_subscribed')->default(false);
+            $table->string('stripe_subscription_id')->nullable();
         });
     }
 
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['is_subscribed', 'stripe_subscription_id']);
+        });
     }
 };
