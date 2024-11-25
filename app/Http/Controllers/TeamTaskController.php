@@ -120,7 +120,7 @@ class TeamTaskController extends Controller
 
         $task->delete();
 
-        return redirect()->back()->with('success', 'Team task deleted successfully!');
+        return redirect()->back()->with('error', 'Team task deleted successfully!');
     }
 
     public function markAsCompleted(Team $team, Task $task)

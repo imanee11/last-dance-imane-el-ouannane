@@ -107,10 +107,38 @@ class TeamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Team $team)
-    {
-        //
-    }
+    // public function update(Request $request, Team $team)
+    // {
+    //     //
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'description' => 'nullable|string',
+    //         'image' => 'nullable',
+    //     ]);
+
+    //     $oldFilePath = storage_path("app/public/images/{$team->image}");
+
+    //     if (file_exists($oldFilePath)) {
+    //         unlink($oldFilePath);
+    //     }
+
+    //     // Store the new file
+    //     $image = $request->image;
+    //     $imageName = hash('sha256', file_get_contents($image)) . '.' . $image->getClientOriginalExtension();
+    //     $image->move(storage_path('app/public/images'), $imageName);
+
+
+    //     $team->update([
+    //         "name" => $request->name,
+    //         "description" => $request->description,
+    //         'image' => $imageName,
+    //     ]);
+
+    //     return redirect()->back()->with('info', ' Team updated successfully!');
+
+        
+
+    // }
 
     /**
      * Remove the specified resource from storage.

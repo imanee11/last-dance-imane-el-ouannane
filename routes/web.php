@@ -39,7 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/team' , [TeamController::class, 'index'])->name("team.index");
     Route::post('/team/store' , [TeamController::class, 'store'])->name("team.store");
     Route::get('/team/show/{team}' , [TeamController::class, 'show'])->name('team.show');
-    Route::delete('/team/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
+    Route::delete('/team/{team}' , [TeamController::class, 'destroy'])->name('team.destroy');
+    // Route::put('/team/update/{team}' , [TeamController::class, 'update'])->name('team.update');
+
 
 
     // Route::post('/team/invitation/{teamId}' , [InvitationController::class, 'store'])->name("invite.store");

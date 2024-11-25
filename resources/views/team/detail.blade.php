@@ -295,7 +295,7 @@
     <div class="px-[3vw] py-[2vh]">
         <div class="bg-[#1C1C1C] rounded-2xl p-8 border-[1px] border-[#2e2e2e]">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-bold text-[#fff] bg-clip-text">Team's tasks</h2>
+                <h2 class="text-2xl font-bold text-[#fff] bg-clip-text">Tasks</h2>
                 <div class="flex gap-4">
                     <div class="flex items-center gap-2 px-4 py-2 rounded-lg border-[1px] border-[#2e2e2e]">
                         <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
@@ -374,7 +374,7 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex  justify-end gap-4">
-                                        @if($task->status !== 'completed' && (Auth::id() === $team->owner_id || Auth::id() === $task->assigned_to))
+                                        @if($task->status !== 'completed' && (Auth::id() === $team->owner_id || Auth::id() === $task->assigned_to || Auth::id() === $task->user_id))
                                             <form action="{{ route('team.tasks.complete', [$team, $task]) }}" method="POST" class="inline">
                                                 @csrf
                                                 <button type="submit" class="text-white/60 hover:text-green-500 transition-colors">

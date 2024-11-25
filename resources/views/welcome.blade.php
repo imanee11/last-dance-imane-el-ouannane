@@ -92,8 +92,10 @@
                 </div>
             </div>
 
-            <div class="flex justify-center items-center pt-5">
-                <img class="w-[85vw] rounded-lg" src="{{ asset('images/bg.png') }}" alt="logo Image" >
+            <div class="flex justify-center items-center py-5">
+                <img class="w-[85vw] rounded-lg" src="{{ asset('images/image.png') }}" alt="logo Image" >
+                {{-- <img class="w-[85vw] rounded-lg" src="{{ asset('images/MacBook.webp') }}" alt="logo Image" > --}}
+
             </div>
 
         </section>
