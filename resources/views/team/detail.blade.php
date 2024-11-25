@@ -267,10 +267,12 @@
             @endif
 
             {{-- chat btn --}}
-            <button class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium">
-                <i class="fa-solid fa-comments text-[#6dc489] text-[15px]"></i>
-                Chat
-            </button>
+            <a href="/chatify">
+                <button class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium">
+                    <i class="fa-solid fa-comments text-[#6dc489] text-[15px]"></i>
+                    Chat
+                </button>
+            </a>
         </div>
 
         <div class="profile-picture flex items-center gap-2">
@@ -401,7 +403,7 @@
             {{-- Empty State --}}
             @if($team->tasks()->count() === 0)
             <div class="text-center py-12">
-                <div class="bg-[#272727] inline-block p-4 rounded-full mb-4">
+                <div class=" inline-block p-4 rounded-full mb-4">
                     <i class="fa-regular fa-clipboard text-4xl text-[#6737f5]"></i>
                 </div>
                 <h3 class="text-white font-medium mb-2">No Tasks Yet</h3>

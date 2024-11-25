@@ -94,4 +94,12 @@ class TaskController extends Controller
 
         return redirect()->back()->with('error', 'Personal task deleted successfully!');
     }
+
+    public function markAsCompleted(Task $task)
+    {
+
+        $task->update(['status' => 'completed']);
+
+        return redirect()->back()->with('success', 'Personal task marked as completed!');
+    }
 }

@@ -258,6 +258,17 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex items-center gap-4">
+
+                                        @if($personalTask->status !== 'completed')
+                                            <form action="{{ route('task.complete', [$personalTask]) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="text-white/60 hover:text-green-500 transition-colors">
+                                                    <i class="fa-solid fa-check"></i>
+                                                </button>
+                                            </form>
+                                        @endif
+
+
                                         <button data-task-id="{{ $personalTask->id }}" 
                                                 onclick="document.getElementById('editTaskModal-{{ $personalTask->id }}').classList.remove('hidden')"
                                                 class="text-white/60 hover:text-[#6737f5] transition-colors">

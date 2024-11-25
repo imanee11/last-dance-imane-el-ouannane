@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ChatifyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
@@ -30,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/task/store' , [TaskController::class, 'store'])->name("task.store");
     Route::delete('/task/{task}' , [TaskController::class, 'destroy'])->name('task.destroy');
     Route::put('/task/update/{task}' , [TaskController::class, 'update'])->name('task.update');
-    
+    Route::post('/task/{task}/complete', [TaskController::class, 'markAsCompleted'])->name('task.complete');
+
 
 
     //* team
@@ -69,6 +71,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscription/payment', [SubscriptionController::class, 'show'])->name('subscription.show');
     Route::post('/subscription/create-checkout-session', [SubscriptionController::class, 'createCheckoutSession'])->name('subscription.checkout');
     Route::get('/subscription/success', [SubscriptionController::class, 'success'])->name('subscription.success');
+
+
+    //* chatify
+    Route::get('/chatify/{team}' , [ChatifyController::class, 'index'])->name("chatify.index");
+
 
 });
 
