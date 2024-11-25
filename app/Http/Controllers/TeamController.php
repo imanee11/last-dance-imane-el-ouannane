@@ -117,6 +117,21 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
-        //
+        if (Auth::id() !== $team->owner_id) {
+            return redirect()->back()->with('error', 'Unauthorized. Only team owners can delete their teams.');
+        }
+
+        // Delete the team image if it exists
+        if ($team->image) {
+            $imagePath = storage_path("app/public/images/" . $team->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        $team->delete();
+        return redirect()->route('team.index')->with('success', 'Team deleted successfully!');
     }
 }
+
+

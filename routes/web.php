@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamTaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,12 +37,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/team' , [TeamController::class, 'index'])->name("team.index");
     Route::post('/team/store' , [TeamController::class, 'store'])->name("team.store");
     Route::get('/team/show/{team}' , [TeamController::class, 'show'])->name('team.show');
+    Route::delete('/team/{team}', [TeamController::class, 'destroy'])->name('team.destroy');
+
+
     // Route::post('/team/invitation/{teamId}' , [InvitationController::class, 'store'])->name("invite.store");
 
     Route::post('/teams/{team}/invite', [InvitationController::class, 'invite'])
     ->name('team.invite');
     Route::get('/invitation/{invitation}/respond', [InvitationController::class, 'respond'])
     ->name('invitation.respond');
+
+
+
+
+    Route::post('/teams/{team}/tasks', [TeamTaskController::class, 'store'])->name('team.tasks.store');
+    Route::put('/teams/{team}/tasks/{task}', [TeamTaskController::class, 'update'])->name('team.tasks.update');
+    Route::delete('/teams/{team}/tasks/{task}', [TeamTaskController::class, 'destroy'])->name('team.tasks.destroy');
+    Route::post('/teams/{team}/tasks/{task}/complete', [TeamTaskController::class, 'markAsCompleted'])->name('team.tasks.complete');
 
 
 

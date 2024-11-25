@@ -28,7 +28,11 @@ class CalendarController extends Controller
     {
         //
 
-        $events = Task::where('user_id', Auth::id())->get();
+        // $events = Task::where('user_id', Auth::id())->get();
+
+        $events = auth()->user()->tasks()
+        ->whereNull('team_id')
+        ->get(); 
 
         $events = $events->map(function ($e) {
             return [

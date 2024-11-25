@@ -14,7 +14,11 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user(); 
-        $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
+        // $personalTasks = auth()->user()->tasks()->orderBy('created_at', 'desc')->get(); 
+        $personalTasks = auth()->user()->tasks()
+        ->whereNull('team_id')
+        ->orderBy('created_at', 'desc')
+        ->get(); 
         // $teams = auth()->user()->teams()->orderBy('created_at', 'desc')->get(); 
         // $teams = Team::all();
         // $teams = Team::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();

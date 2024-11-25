@@ -62,7 +62,7 @@
                 </div>
 
                 {{-- modal form --}}
-                <form action="{{ route('task.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('team.tasks.store', $team) }}" method="POST" class="mt-4">
                     @csrf
 
                     {{-- task name --}}
@@ -107,6 +107,23 @@
                             <option value="high" class="text-[#000]">High</option>
                         </select>
                     </div>
+
+                    {{-- Assigned To (Only visible for team owner) --}}
+                    @if(Auth::id() === $team->owner_id)
+                    <div class="mb-4">
+                        <x-input-label for="assigned_to" :value="__('Assign to')" />
+                        <select 
+                            id="assigned_to" 
+                            name="assigned_to" 
+                            class="block mt-1 w-full border-[#fff]/25 bg-transparent focus:outline-none focus:ring-0 focus:border-[#fff]/25 text-[#fff] rounded-md shadow-sm"
+                        >
+                            <option value="" class="text-[#000]">Select team member</option>
+                            @foreach($team->users as $member)
+                                <option value="{{ $member->id }}" class="text-[#000]">{{ $member->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
 
                     <!-- Submit Button -->
                     <div class="flex justify-end gap-2">
@@ -172,7 +189,6 @@
         </div> 
         @endif
 
-
         {{-- showMembers --}}
         {{-- show members modal (only visible to team owner) --}}
         @if(Auth::id() === $team->owner_id)
@@ -211,13 +227,11 @@
                                 </div>
                                 <div class="">
                                     <a href="" class="text-xs font-medium text-[#6737f5]/60  hover:text-[#6737f5] underline">Remove</a>
-
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div> 
         @endif
@@ -243,7 +257,6 @@
             </button>
             @endif
 
-
             @if(Auth::id() === $team->owner_id)
             <button
                 class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium"
@@ -253,13 +266,11 @@
             </button>
             @endif
 
-
             {{-- chat btn --}}
             <button class="bg-[#272727] border-[1px] border-[#2e2e2e] rounded-full px-4 py-2 text-[#fff] flex gap-2 items-center text-sm font-medium">
-            <i class="fa-solid fa-comments text-[#6dc489] text-[15px]"></i>
-            Chat
-        </button>
-
+                <i class="fa-solid fa-comments text-[#6dc489] text-[15px]"></i>
+                Chat
+            </button>
         </div>
 
         <div class="profile-picture flex items-center gap-2">
@@ -279,55 +290,124 @@
         </div>
     </div>
 
-    <div class="px-[3vw]">
-        <div class="flex items-center bg-[#1C1C1C]  justify-between border-[#2e2e2e] border-[1px] py-2 px-3 rounded-md shadow-sm cursor-pointer">
-            <div class="flex gap-2 items-center">
-                <i class="fa-solid fa-circle text-[18px] animate-pulse  text-[#6dc489]"></i>
-                <p class="text-[#fff]  font-medium">{{ $team->name }}</p>
-            </div>
-
-            <div class="flex items-center justify-start gap-2">
-                <div class="flex items-center">
-                    <!-- Avatar group -->
-                    <div class="flex -space-x-2">
-                        @foreach($team->users->take(2) as $user)
-                            @if($user->image)
-                                <img class="w-8 h-8 rounded-full border-2 border-[#2e2e2e] object-cover" 
-                                     src="{{ asset('storage/' . $user->image) }}" 
-                                     alt="{{ $user->name }}"
-                                     title="{{ $user->name }}">
-                            @else
-                                <div class="w-8 h-8 rounded-full border-2 border-[#2e2e2e] bg-gray-600 flex items-center justify-center">
-                                    <span class="text-white text-xs">
-                                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                                    </span>
-                                </div>
-                            @endif
-                        @endforeach
+    <div class="px-[3vw] py-[2vh]">
+        <div class="bg-[#1C1C1C] rounded-2xl p-8 border-[1px] border-[#2e2e2e]">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-[#fff] bg-clip-text">Team's tasks</h2>
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-2 px-4 py-2 rounded-lg border-[1px] border-[#2e2e2e]">
+                        <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-sm text-white/70">Active Team</span>
                     </div>
-                    
-                    <!-- Additional count with tooltip -->
-                    @if($team->users->count() > 2)
-                        <div class="relative group">
-                            <div class="ml-1 text-xs font-semibold text-[#6dc489] rounded-full cursor-pointer">
-                                +{{ $team->users->count() - 2 }}
-                            </div>
-                            <!-- Tooltip -->
-                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-max">
-                                <div class="bg-[#2e2e2e] text-white text-xs rounded-lg py-2 px-3 shadow-lg">
-                                    <div class="flex flex-col gap-1">
-                                        @foreach($team->users->skip(2) as $user)
-                                            <span>{{ $user->name }}</span>
-                                        @endforeach
-                                    </div>
-                                    <!-- Arrow -->
-                                    <div class="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#2e2e2e] rotate-45"></div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
+
+            <div class="overflow-hidden rounded-xl border-[1px] border-[#2e2e2e]">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-[#272727]">
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Task</th>
+                            {{-- <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Description</th> --}}
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Assigned To</th>
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Status</th>
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Priority</th>
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Timeline</th>
+                            <th class="text-left py-4 px-6 text-xs uppercase tracking-wider text-white/50 font-semibold">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        @foreach($team->tasks()->orderBy('created_at', 'desc')->get() as $task)
+                            <tr class="group hover:bg-white/5 transition-all duration-200">
+                                <td class="py-4 px-6">
+                                    <p class="text-white font-medium transition-colors">{{ $task->name }}</p>
+                                </td>
+                                {{-- <td class="py-4 px-6">
+                                    <p class="text-white/60 text-sm line-clamp-1">{{ $task->description }}</p>
+                                </td> --}}
+                                <td class="py-4 px-6">
+                                    @if($task->assigned_to)
+                                        <div class="flex items-center gap-2">
+                                            @if($task->assignedUser->image)
+                                                <img class="w-6 h-6 rounded-full border-2 border-[#2e2e2e] object-cover" 
+                                                     src="{{ asset('storage/' . $task->assignedUser->image) }}" 
+                                                     alt="{{ $task->assignedUser->name }}">
+                                            @else
+                                                <div class="w-6 h-6 rounded-full border-2 border-[#2e2e2e] bg-gray-600 flex items-center justify-center">
+                                                    <span class="text-white text-xs">
+                                                        {{ strtoupper(substr($task->assignedUser->name, 0, 1)) }}
+                                                    </span>
+                                                </div>
+                                            @endif
+                                            <span class="text-white/60 text-sm">{{ $task->assignedUser->name }}</span>
+                                        </div>
+                                    @else
+                                        <span class="text-white/40 text-sm">Unassigned</span>
+                                    @endif
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium
+                                        @if($task->status === 'completed') bg-green-500/10 text-green-400
+                                        @elseif($task->status === 'in_progress') bg-blue-500/10 text-blue-400
+                                        @else bg-yellow-500/10 text-yellow-400
+                                        @endif">
+                                        {{ ucfirst(str_replace('_', ' ', $task->status)) }}
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full
+                                            @if($task->priority === 'high') bg-red-500
+                                            @elseif($task->priority === 'medium') bg-yellow-500
+                                            @else bg-green-500
+                                            @endif">
+                                        </span>
+                                        <p class="text-white/60 text-sm capitalize">{{ $task->priority }}</p>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="text-white/60 text-sm">
+                                        {{ \Carbon\Carbon::parse($task->start)->format('M d , H:i A ') }} - 
+                                        {{ \Carbon\Carbon::parse($task->end)->format('M d , H:i A ') }}
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <div class="flex  justify-end gap-4">
+                                        @if($task->status !== 'completed' && (Auth::id() === $team->owner_id || Auth::id() === $task->assigned_to))
+                                            <form action="{{ route('team.tasks.complete', [$team, $task]) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="text-white/60 hover:text-green-500 transition-colors">
+                                                    <i class="fa-solid fa-check"></i>
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                        @if(Auth::id() === $team->owner_id || Auth::id() === $task->user_id)
+                                            <form action="{{ route('team.tasks.destroy', [$team, $task]) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-white/60 hover:text-red-500 transition-colors">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- Empty State --}}
+            @if($team->tasks()->count() === 0)
+            <div class="text-center py-12">
+                <div class="bg-[#272727] inline-block p-4 rounded-full mb-4">
+                    <i class="fa-regular fa-clipboard text-4xl text-[#6737f5]"></i>
+                </div>
+                <h3 class="text-white font-medium mb-2">No Tasks Yet</h3>
+                <p class="text-gray-400">Create your first task to get started!</p>
+            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
