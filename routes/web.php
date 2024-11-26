@@ -55,10 +55,10 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/teams/{team}/tasks', [TeamTaskController::class, 'store'])->name('team.tasks.store');
-    Route::put('/teams/{team}/tasks/{task}', [TeamTaskController::class, 'update'])->name('team.tasks.update');
+    Route::put('/teams/{team}/tasks/{task}', [TaskController::class, 'update'])->name('team.tasks.update');
     Route::delete('/teams/{team}/tasks/{task}', [TeamTaskController::class, 'destroy'])->name('team.tasks.destroy');
     Route::post('/teams/{team}/tasks/{task}/complete', [TeamTaskController::class, 'markAsCompleted'])->name('team.tasks.complete');
-
+    Route::post('/teams/{team}/tasks/{task}/complete', [TeamTaskController::class, 'markAsCompleted'])->name('team.tasks.complete');
 
 
     //* calendar
@@ -67,6 +67,9 @@ Route::middleware('auth')->group(function () {
     Route::resource("calendar" , CalendarController::class);
     Route::put("/calendar/update/{calendar}" , [CalendarController::class , "update"])->name("updateCalendar");
     Route::delete("/calendar/delete/{calendar}" , [CalendarController::class , "destroy"])->name("deleteCalendar");
+
+    // Route::get('/team/{team}/tasks', [TeamTaskController::class, 'getTeamTasks'])
+    // ->name('team.tasks.calendar');
 
 
     //* subscription

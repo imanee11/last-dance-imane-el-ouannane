@@ -139,4 +139,5 @@ class TeamTaskController extends Controller
 
         return redirect()->back()->with('success', 'Task marked as completed!');
     }
+
 }
